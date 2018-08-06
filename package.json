@@ -17,7 +17,6 @@
     "streamsink": "~1.2.0"
   },
   "dependencies": {
-    "pend": "~1.2.0"
   },
   "directories": {
     "test": "test"
