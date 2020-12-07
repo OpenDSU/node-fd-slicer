@@ -189,7 +189,7 @@ describe("FdSlicer", function() {
         assert.strictEqual(err.code, 'ETOOBIG');
         slicer.on('close', done);
       });
-      ws.end(new Buffer(1001));
+      ws.end(new $$.Buffer(1001));
     });
   });
 
@@ -199,7 +199,7 @@ describe("FdSlicer", function() {
       var slicer = fdSlicer.createFromFd(fd, {autoClose: true});
       var ws = slicer.createWriteStream({end: 1000});
       slicer.on('close', done);
-      ws.end(new Buffer(1000));
+      ws.end(new $$.Buffer(1000));
     });
   });
 
@@ -212,7 +212,7 @@ describe("FdSlicer", function() {
         assert.strictEqual(err.code, 'ETOOBIG');
         slicer.on('close', done);
       });
-      ws.end(new Buffer(1000));
+      ws.end(new $$.Buffer(1000));
     });
   });
 
@@ -233,7 +233,7 @@ describe("FdSlicer", function() {
         done();
       });
       for (var i = 0; i < 10; i += 1) {
-        ws.write(new Buffer(16 * 1024 * 2));
+        ws.write(new $$.Buffer(16 * 1024 * 2));
       }
       ws.end();
     });
@@ -245,7 +245,7 @@ describe("FdSlicer", function() {
       var slicer = fdSlicer.createFromFd(fd, {autoClose: true});
       var ws = slicer.createWriteStream();
       slicer.on('close', done);
-      ws.write(new Buffer(1000));
+      ws.write(new $$.Buffer(1000));
       ws.destroy();
     });
   });
@@ -267,7 +267,7 @@ describe("FdSlicer", function() {
     fs.open(testBlobFile, 'r', function(err, fd) {
       if (err) return done(err);
       var slicer = fdSlicer.createFromFd(fd);
-      var outBuf = new Buffer(1024);
+      var outBuf = new $$.Buffer(1024);
       slicer.read(outBuf, 0, 10, 0, function(err, bytesRead, buf) {
         assert.strictEqual(bytesRead, 10);
         fs.close(fd, done);
@@ -279,7 +279,7 @@ describe("FdSlicer", function() {
     fs.open(testOutBlobFile, 'w', function(err, fd) {
       if (err) return done(err);
       var slicer = fdSlicer.createFromFd(fd);
-      slicer.write(new Buffer("blah\n"), 0, 5, 0, function() {
+      slicer.write(new $$.Buffer("blah\n"), 0, 5, 0, function() {
         if (err) return done(err);
         fs.close(fd, done);
       });
@@ -289,7 +289,7 @@ describe("FdSlicer", function() {
 
 describe("BufferSlicer", function() {
   it("invalid ref", function() {
-    var slicer = fdSlicer.createFromBuffer(new Buffer(16));
+    var slicer = fdSlicer.createFromBuffer(new $$.Buffer(16));
     slicer.ref();
     slicer.unref();
     assert.throws(function() {
@@ -297,13 +297,13 @@ describe("BufferSlicer", function() {
     }, /invalid unref/);
   });
   it("read and write", function(done) {
-    var buf = new Buffer("through the tangled thread the needle finds its way");
+    var buf = new $$.Buffer("through the tangled thread the needle finds its way");
     var slicer = fdSlicer.createFromBuffer(buf);
-    var outBuf = new Buffer(1024);
+    var outBuf = new $$.Buffer(1024);
     slicer.read(outBuf, 10, 11, 8, function(err) {
       if (err) return done(err);
       assert.strictEqual(outBuf.toString('utf8', 10, 21), "the tangled");
-      slicer.write(new Buffer("derp"), 0, 4, 7, function(err) {
+      slicer.write(new $$.Buffer("derp"), 0, 4, 7, function(err) {
         if (err) return done(err);
         assert.strictEqual(buf.toString('utf8', 7, 19), "derp tangled");
         done();
@@ -312,7 +312,7 @@ describe("BufferSlicer", function() {
   });
   it("createReadStream", function(done) {
     var str = "I never conquered rarely came, 16 just held such better days";
-    var buf = new Buffer(str);
+    var buf = new $$.Buffer(str);
     var slicer = fdSlicer.createFromBuffer(buf);
     var inStream = slicer.createReadStream();
     var sink = new StreamSink();
@@ -324,7 +324,7 @@ describe("BufferSlicer", function() {
     });
   });
   it("createWriteStream exceed buffer size", function(done) {
-    var slicer = fdSlicer.createFromBuffer(new Buffer(4));
+    var slicer = fdSlicer.createFromBuffer(new $$.Buffer(4));
     var outStream = slicer.createWriteStream();
     outStream.on('error', function(err) {
       assert.strictEqual(err.code, 'ETOOBIG');
@@ -335,7 +335,7 @@ describe("BufferSlicer", function() {
     outStream.end();
   });
   it("createWriteStream ok", function(done) {
-    var buf = new Buffer(1024);
+    var buf = new $$.Buffer(1024);
     var slicer = fdSlicer.createFromBuffer(buf);
     var outStream = slicer.createWriteStream();
     outStream.on('finish', function() {

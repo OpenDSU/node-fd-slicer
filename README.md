@@ -38,7 +38,7 @@ This module also gives you some additional power that the builtin
 
  * Emitting a 'progress' event on write.
  * Ability to set a maximum size and emit an error if this size is exceeded.
- * Ability to create an `FdSlicer` instance from a `Buffer`. This enables you
+ * Ability to create an `FdSlicer` instance from a `$$.Buffer`. This enables you
    to provide API for handling files as well as buffers using the same API.
 
 ## Usage
@@ -152,7 +152,7 @@ Available `options`:
  * `end` - Number. Exclusive upper bound offset into the file. If this offset
    is reached, the write stream will emit an 'error' event and stop functioning.
    In this situation, `err.code === 'ETOOBIG'`. Defaults to `Infinity`.
- * `highWaterMark` - Number. Buffer level when `write()` starts returning
+ * `highWaterMark` - Number. $$.Buffer level when `write()` starts returning
    false. Defaults to 16KB.
  * `decodeStrings` - Boolean. Whether or not to decode strings into Buffers
    before passing them to` _write()`. Defaults to `true`.

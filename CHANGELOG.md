@@ -10,7 +10,7 @@
 
 ### 0.4.0
 
- * add ability to create an FdSlicer instance from a Buffer
+ * add ability to create an FdSlicer instance from a $$.Buffer
 
 ### 0.3.2
 
