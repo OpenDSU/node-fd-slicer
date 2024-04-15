@@ -57,7 +57,7 @@ function testBasic(cb) {
       cb();
     }, 1000);
   });
-  pend.wait(function(err) {
+  pend.wait(function() {
     assert.deepEqual(results, [1,2,3,4]);
     cb();
   });
@@ -89,7 +89,7 @@ function testWithMax(cb) {
       cb();
     }, 100);
   });
-  pend.wait(function(err) {
+  pend.wait(function() {
     assert.deepEqual(results, ['a', 'b', 1, 'c', 1, 2]);
     cb();
   });

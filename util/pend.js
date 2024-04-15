@@ -15,7 +15,7 @@ function AsyncHelper() {
 
 	function wait(self) {
 		self.pending += 1;
-		var called = false;
+		const called = false;
 		return onNext;
 		function onNext(err) {
 			if (called) throw new Error("calling twice");
@@ -25,7 +25,7 @@ function AsyncHelper() {
 			if (waiting.length > 0 && self.pending < self.max) {
 				execute(self, waiting.shift());
 			} else if (self.pending === 0) {
-				var oldListeners = listeners;
+				const oldListeners = listeners;
 				listeners = [];
 				oldListeners.forEach(cbListener);
 			}
