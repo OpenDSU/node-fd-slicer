@@ -15,7 +15,7 @@ function AsyncHelper() {
 
     function wait(self) {
         self.pending += 1;
-        const called = false;
+        let called = false;
         return onNext;
 
         function onNext(err) {
